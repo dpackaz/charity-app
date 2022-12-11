@@ -12,6 +12,7 @@ const populate = async (json) => {
       .then((response) => {
         if (response.statusText === "OK") {
           data.value = response.data.total_count;
+          data.id = "US-" + data.id;
         }
       })
       .catch((err) => {
