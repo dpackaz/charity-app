@@ -1,7 +1,9 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
-//TODO: create resolvers
+const { User, Charity, Drive } = require("../models");
+
+//create resolvers
 const resolvers = {
   Query: {
     users: async () => {
@@ -23,6 +25,14 @@ const resolvers = {
   Mutation: {
     addUser: async ({ name, email, password }) => {
       return await User.create({ name, email, password });
+    },
+    updateUser: async ({ id, email, password }) => {
+      return await Drive.findOneAndUpdate(
+        { _id: id },
+        { email },
+        { password },
+        { new: true }
+      );
     },
     addDrive: async ({ user, charity, goal }) => {
       return await Drive.create({ user, charity, goal });
