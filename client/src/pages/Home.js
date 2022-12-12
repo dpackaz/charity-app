@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../utils/mutations";
 import "../res/css/Home.css";
+
 const Home = () => {
+  const [login, { error }] = useMutation(LOGIN);
+
   return (
     <>
       <div fluid className="text-light bg-dark jumbotron text-center">
