@@ -1,10 +1,10 @@
 import React from "react";
-import './Home.css'
+import "../res/css/Home.css";
 const Home = () => {
   return (
     <>
       <div fluid className="text-light bg-dark jumbotron text-center">
-      Test Jumbotron
+        Test Jumbotron
       </div>
       <main>
         <div className="flex-row justify-center">
