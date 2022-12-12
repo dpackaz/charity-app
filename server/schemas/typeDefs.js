@@ -24,6 +24,19 @@ const typeDefs = gql`
     charity: Charity
     goal: Int
   }
+
+  type Query {
+    users: [User]
+    charities: [Charity]
+    drive(id: ID!): Drive
+  }
+
+  type Mutation {
+    addUser(name: String!, email: String!, password: String!): User
+    updateUser(id: ID!, email: String!, password: String!): User
+    addDrive(user: User!, charity: Charity!, goal: Int!): Drive
+    updateDrive(id: ID!, charity: Charity!, goal: Int!): Drive
+  }
 `;
 
 module.exports = typeDefs;
