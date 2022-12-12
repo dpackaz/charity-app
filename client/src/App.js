@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Router>
-      <div className="flex-column justify-center align-center min-100-vh bg-primary">
+      <div className="flex-column justify-center align-center min-100-vh">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
