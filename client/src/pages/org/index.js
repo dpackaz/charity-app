@@ -30,20 +30,25 @@ const Org = () => {
         remove 111,000 pieces of trash from Los Angeles Country beaches, rivers,
         and neighborhoods."
       </p>
-      <h3 className="text-center">Causes</h3>
-      <div className="d-flex justify-content-around">
-        {
-          //return an unordered list of causes
-          causes.map((cause) => {
-            return (
-              <div className="p-2">
-                <span className="badge text-bg-secondary fs-4 rounded-pill">
-                  {cause}
-                </span>
-              </div>
-            );
-          })
-        }
+      <div className="position-relative">
+        <div className="text-center">
+          <h3 className="badge text-bg-primary fs-3"> Causes </h3>
+        </div>
+
+        <div className="d-flex justify-content-around">
+          {
+            //return an unordered list of causes
+            causes.map((cause) => {
+              return (
+                <div className="p-2">
+                  <span className="badge text-bg-secondary fs-4 rounded-pill">
+                    {cause}
+                  </span>
+                </div>
+              );
+            })
+          }
+        </div>
       </div>
 
       {/* Address */}
