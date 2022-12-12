@@ -34,7 +34,7 @@ const resolvers = {
         { new: true }
       );
     },
-    addDrive: async ({ user, charity, goal }) => {
+    addDrive: async (parent, { user, charity, goal }) => {
       return await Drive.create({ user, charity, goal });
     },
     updateDrive: async (parent, { id, charity, goal }) => {
