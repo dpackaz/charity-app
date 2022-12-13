@@ -17,7 +17,9 @@ const resolvers = {
       return await Charities.find({});
     },
     charity: async (_parent, args) => {
-      return await Charities.findOne({ charityId: args.id });
+      // console.log("resolvers charity")
+      // console.log(args)
+      return await Charities.findOne({ charityID: args.id });
     },
     driveMe: async (_parent, { id }) => {
       return await Drive.findById(id).populate("organizer").populate("charity");
