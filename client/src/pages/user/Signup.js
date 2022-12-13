@@ -25,41 +25,41 @@ export default function Login() {
   return (
     <div className="row d-flex justify-content-center mt-5">
       <form className="col-4">
-        <div class="mb-3">
-          <label for="firstname" class="form-label">
+        <div className="mb-3">
+          <label for="firstname" className="form-label">
             First name
           </label>
-          <input type="text" class="form-control" id="firstname" />
+          <input type="text" className="form-control" id="firstname" />
         </div>
-        <div class="mb-3">
-          <label for="lastname" class="form-label">
+        <div className="mb-3">
+          <label for="lastname" className="form-label">
             Last name
           </label>
-          <input type="text" class="form-control" id="lastname" />
+          <input type="text" className="form-control" id="lastname" />
         </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">
+        <div className="mb-3">
+          <label for="email" className="form-label">
             Email address
           </label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             id="email"
             aria-describedby="emailHelp"
           />
-          <div id="emailHelp" class="form-text">
+          <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
           </div>
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">
+        <div className="mb-3">
+          <label for="password" className="form-label">
             Password
           </label>
-          <input type="password" class="form-control" id="password" />
+          <input type="password" className="form-control" id="password" />
         </div>
         <button
           type="submit"
-          class="btn btn-primary"
+          className="btn btn-primary"
           onClick={handleSubmission}
         >
           Submit
