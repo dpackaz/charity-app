@@ -48,7 +48,7 @@ const typeDefs = gql`
     user(userId: ID!): User
     charities: [Charity]
     drive(id: ID!): Drive
-    charity: Charity
+    charity(id: String): Charity
   }
 
   type Mutation {

@@ -12,8 +12,12 @@ const resolvers = {
     user: async (_parent, { userId }) => {
       return await User.findById(userId);
     },
+    charities: async () => {
+      return await Charities.find({});
+    },
     charity: async (_parent, args) => {
-      return await Charities.findById(args.id);
+      console.log(args);
+      return await Charities.findOne({ charityID: args.id });
     },
     drive: async () => {
       return await Drive.find({}).populate("users").populate({
