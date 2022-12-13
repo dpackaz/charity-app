@@ -31,27 +31,22 @@ const resolvers = {
       return await (
         await User.create({ firstName, lastName, email, password })
       ).populate("friends");
+    },
     signup: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
-
       return { token, user };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
       }
-
       const correctPw = await user.isCorrectPassword(password);
-
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
       }
-
       const token = signToken(user);
-
       return { token, user };
     },
     updateUser: async (_parent, { id, email, password }) => {
