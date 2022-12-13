@@ -25,6 +25,7 @@ const typeDefs = gql`
     website_Url: String
     pledge_Url: String
     logo_Url: String
+    causes: [String]
   }
 
   input CharityInput {
@@ -35,6 +36,7 @@ const typeDefs = gql`
     website_Url: String
     pledge_Url: String
     logo_Url: String
+    causes:[String]
   }
 
   type Drive {

@@ -30,6 +30,9 @@ const newCharities = new Schema(
       type: String,
       required: true,
     },
+    causes: [{
+      type:String
+    },]
   },
   {
     toJSON: {
