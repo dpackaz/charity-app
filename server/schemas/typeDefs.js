@@ -47,7 +47,8 @@ const typeDefs = gql`
     users: [User]
     user(userId: ID!): User
     charities: [Charity]
-    drive(id: ID!): Drive
+    driveMe(id: ID!): Drive
+    driveAll: [Drive]
     charity(id: String): Charity
   }
 
@@ -66,4 +67,6 @@ const typeDefs = gql`
 `;
 //TODO: Modifify updateUser to be more flexible
 // words
+//TODO: updateDrive to update User and change Goal
+
 module.exports = typeDefs;

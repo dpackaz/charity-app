@@ -18,11 +18,11 @@ const resolvers = {
     charity: async (_parent, args) => {
       return await Charities.findOne({ charityID: args.id });
     },
-    drive: async () => {
-      return await Drive.find({}).populate("users").populate({
-        path: "users",
-        populate: "charity",
-      });
+    driveMe: async (_parent, {id}) => {
+      return await Drive.findById(id).populate("organizer").populate("charity");
+    },
+    driveAll: async () =>{
+      return await Drive.find({}).populate("organizer").populate("charity");
     },
   },
   Mutation: {
