@@ -9,8 +9,8 @@ const resolvers = {
     users: async () => {
       return await User.find({});
     },
-    charities: async () => {
-      return await Charities.find({});
+    user: async (_parent, { userId }) => {
+      return await User.findById(userId);
     },
     charity: async (_parent, args) => {
       return await Charities.findById(args.id);
@@ -27,10 +27,9 @@ const resolvers = {
       return await User.create({ firstName, lastName, email, password });
     },
     updateUser: async (_parent, { id, email, password }) => {
-      return await Drive.findOneAndUpdate(
+      return await User.findOneAndUpdate(
         { _id: id },
-        { email },
-        { password },
+        { email: email, password: password },
         { new: true }
       );
     },

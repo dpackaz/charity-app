@@ -42,6 +42,7 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
+    user(userId: ID!): User
     charities: [Charity]
     drive(id: ID!): Drive
     charity: Charity
@@ -54,10 +55,11 @@ const typeDefs = gql`
       email: String!
       password: String!
     ): User
-    updateUser(id: ID!, email: String!, password: String!): User
+
+    updateUser(id: ID!, email: String, password: String): User
     addDrive(user: UserInput!, charity: CharityInput!, goal: Int!): Drive
     updateDrive(id: ID!, charity: CharityInput!, goal: Int!): Drive
   }
 `;
-
+//TODO: Modifify updateUser to be more flexible
 module.exports = typeDefs;
