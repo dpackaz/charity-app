@@ -43,6 +43,19 @@ const typeDefs = gql`
     goal: Int
   }
 
+  type Auth {
+    token: ID
+    user: User
+  }
+
+  type User {
+    _id: ID
+    firstName: String
+    lastName: String
+    email: String
+    friends: [User]
+  }
+
   type Query {
     users: [User]
     user(userId: ID!): User
@@ -53,12 +66,13 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(
+    signup(
       firstName: String!
       lastName: String!
       email: String!
       password: String!
-    ): User
+    ): Auth
+    login(email: String!, password: String!): Auth
     saveCharity(newCharity: CharityInput): Charity
     updateUser(id: ID!, email: String, password: String): User
     addDrive(userId: ID!, charityId: String!, goal: Int!): Drive
