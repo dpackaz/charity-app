@@ -36,6 +36,12 @@ const userSchema = new Schema({
       ref: "User",
     },
   ],
+  charities: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Charity",
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {

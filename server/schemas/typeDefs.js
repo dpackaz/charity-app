@@ -57,6 +57,7 @@ const typeDefs = gql`
     lastName: String
     email: String
     friends: [User]
+    charities: [Charity]
   }
 
   type Query {
