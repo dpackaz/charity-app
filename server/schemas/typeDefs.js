@@ -66,19 +66,6 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(
-      firstName: String!
-      lastName: String!
-      email: String!
-      password: String!
-    ): User
-    saveCharity(newCharity: CharityInput): Charity
-    updateUser(id: ID!, email: String, password: String): User
-    addDrive(userId: ID!, charityId: String!, goal: Int!): Drive
-    updateDrive(id: ID!, charity: CharityInput!, goal: Int!): Drive
-  }
-
-  type Mutation {
     signup(
       firstName: String!
       lastName: String!
@@ -86,6 +73,10 @@ const typeDefs = gql`
       password: String!
     ): Auth
     login(email: String!, password: String!): Auth
+    saveCharity(newCharity: CharityInput): Charity
+    updateUser(id: ID!, email: String, password: String): User
+    addDrive(userId: ID!, charityId: String!, goal: Int!): Drive
+    updateDrive(id: ID!, charity: CharityInput!, goal: Int!): Drive
   }
 `;
 //TODO: Modifify updateUser to be more flexible
