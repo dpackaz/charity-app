@@ -65,4 +65,5 @@ const typeDefs = gql`
   }
 `;
 //TODO: Modifify updateUser to be more flexible
+// words
 module.exports = typeDefs;
