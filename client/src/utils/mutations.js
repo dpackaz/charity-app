@@ -21,7 +21,7 @@ export const LOGIN = gql`
     }
   }
 `;
-
+//TODO: Not Implemented yet
 export const CREATE_DONATION = gql`
   mutation createDonation($user: String!, $charity: String!) {
     createDonation(user: $user, charity: $charity) {
@@ -31,7 +31,7 @@ export const CREATE_DONATION = gql`
     }
   }
 `;
-
+//TODO: createDrive => addDrive
 export const CREATE_DRIVE = gql`
   mutation createDrive($user: String!, $charity: String!) {
     createDrive(user: $user, charity: $charity) {
