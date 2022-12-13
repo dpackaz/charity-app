@@ -1,5 +1,7 @@
 const { Schema, model, Types } = require("mongoose");
 
+const {Charities, User} = require('./index');
+
 const newDrive = new Schema(
   {
     driveID: {
@@ -7,12 +9,12 @@ const newDrive = new Schema(
       default: () => new Types.ObjectId(),
     },
     organizer: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "User"
     },
     charity: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Charities",
     },
     goal: {
         type: Number,

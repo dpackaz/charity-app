@@ -60,7 +60,7 @@ const typeDefs = gql`
     ): User
     saveCharity(newCharity: CharityInput): Charity
     updateUser(id: ID!, email: String, password: String): User
-    addDrive(user: UserInput!, charity: CharityInput!, goal: Int!): Drive
+    addDrive(userId: ID!, charityId: String!, goal: Int!): Drive
     updateDrive(id: ID!, charity: CharityInput!, goal: Int!): Drive
   }
 `;
