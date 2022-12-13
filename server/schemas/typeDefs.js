@@ -17,7 +17,7 @@ const typeDefs = gql`
   }
 
   type Charity {
-    _id: ID
+    charityID: String
     name: String
     mission: String
     address: String
@@ -25,12 +25,15 @@ const typeDefs = gql`
     pledge_Url: String
     logo_Url: String
   }
+
   input CharityInput {
-    _id: ID
+    charityID: String
     name: String
     mission: String
-    location: String
-    website: String
+    address: String
+    website_Url: String
+    pledge_Url: String
+    logo_Url: String
   }
 
   type Drive {
@@ -55,7 +58,7 @@ const typeDefs = gql`
       email: String!
       password: String!
     ): User
-
+    saveCharity(newCharity: CharityInput): Charity
     updateUser(id: ID!, email: String, password: String): User
     addDrive(user: UserInput!, charity: CharityInput!, goal: Int!): Drive
     updateDrive(id: ID!, charity: CharityInput!, goal: Int!): Drive

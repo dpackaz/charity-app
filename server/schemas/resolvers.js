@@ -33,6 +33,9 @@ const resolvers = {
         { new: true }
       );
     },
+    saveCharity: async (_parent, { newCharity }) => {
+      return await Charities.create({ ...newCharity });
+    },
     addDrive: async (_parent, { user, charity, goal }) => {
       return await Drive.create({ user, charity, goal });
     },

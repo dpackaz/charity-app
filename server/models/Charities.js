@@ -3,8 +3,8 @@ const { Schema, Types, model } = require("mongoose");
 const newCharities = new Schema(
   {
     charityID: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
+      type: String,
+      required: true,
     },
     name: {
       type: String,
@@ -15,7 +15,7 @@ const newCharities = new Schema(
       required: true,
     },
     address: {
-      type: Number,
+      type: String,
       required: true,
     },
     website_Url: {
