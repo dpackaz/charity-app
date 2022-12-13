@@ -4,7 +4,8 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   type User {
     _id: ID
-    name: String
+    firstName: String
+    lastName: String
     email: String
     password: String
     friends: [User]
@@ -16,18 +17,23 @@ const typeDefs = gql`
   }
 
   type Charity {
-    _id: ID
+    charityID: String
     name: String
     mission: String
-    location: String
-    website: String
+    address: String
+    website_Url: String
+    pledge_Url: String
+    logo_Url: String
   }
+
   input CharityInput {
-    _id: ID
+    charityID: String
     name: String
     mission: String
-    location: String
-    website: String
+    address: String
+    website_Url: String
+    pledge_Url: String
+    logo_Url: String
   }
 
   type Drive {
@@ -39,17 +45,25 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
+    user(userId: ID!): User
     charities: [Charity]
     drive(id: ID!): Drive
-    charity: Charity
+    charity(id: String): Charity
   }
 
   type Mutation {
-    addUser(name: String!, email: String!, password: String!): User
-    updateUser(id: ID!, email: String!, password: String!): User
+    addUser(
+      firstName: String!
+      lastName: String!
+      email: String!
+      password: String!
+    ): User
+    saveCharity(newCharity: CharityInput): Charity
+    updateUser(id: ID!, email: String, password: String): User
     addDrive(user: UserInput!, charity: CharityInput!, goal: Int!): Drive
     updateDrive(id: ID!, charity: CharityInput!, goal: Int!): Drive
   }
 `;
-
+//TODO: Modifify updateUser to be more flexible
+// words
 module.exports = typeDefs;

@@ -6,7 +6,7 @@ const newDrive = new Schema(
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
     },
-    username: {
+    organizer: {
       type: String,
       required: true,
     },
@@ -14,7 +14,7 @@ const newDrive = new Schema(
       type: String,
       required: true,
     },
-    goalAmount: {
+    goal: {
         type: Number,
         required: true,
       },

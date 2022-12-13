@@ -1,13 +1,12 @@
-
 const { Schema, Types, model } = require("mongoose");
 
 const newCharities = new Schema(
   {
     charityID: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
+      type: String,
+      required: true,
     },
-    username: {
+    name: {
       type: String,
       required: true,
     },
@@ -16,7 +15,7 @@ const newCharities = new Schema(
       required: true,
     },
     address: {
-      type: Number,
+      type: String,
       required: true,
     },
     website_Url: {
@@ -28,9 +27,9 @@ const newCharities = new Schema(
       required: true,
     },
     logo_Url: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
   },
   {
     toJSON: {

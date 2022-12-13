@@ -1,7 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
-const { User, Charity, Drive } = require("../models");
+const { User, Charities, Drive } = require("../models");
 
 //create resolvers
 const resolvers = {
@@ -9,11 +9,15 @@ const resolvers = {
     users: async () => {
       return await User.find({});
     },
-    charities: async () => {
-      return await Charity.find({});
+    user: async (_parent, { userId }) => {
+      return await User.findById(userId);
     },
-    charity: async (args) => {
-      return await Charity.findById(args.id);
+    charities: async () => {
+      return await Charities.find({});
+    },
+    charity: async (_parent, args) => {
+      console.log(args);
+      return await Charities.findOne({ charityID: args.id });
     },
     drive: async () => {
       return await Drive.find({}).populate("users").populate({
@@ -23,21 +27,23 @@ const resolvers = {
     },
   },
   Mutation: {
-    addUser: async ({ name, email, password }) => {
-      return await User.create({ name, email, password });
+    addUser: async (_parent, { firstName, lastName, email, password }) => {
+      return await User.create({ firstName, lastName, email, password });
     },
-    updateUser: async ({ id, email, password }) => {
-      return await Drive.findOneAndUpdate(
+    updateUser: async (_parent, { id, email, password }) => {
+      return await User.findOneAndUpdate(
         { _id: id },
-        { email },
-        { password },
+        { email: email, password: password },
         { new: true }
       );
     },
-    addDrive: async (parent, { user, charity, goal }) => {
+    saveCharity: async (_parent, { newCharity }) => {
+      return await Charities.create({ ...newCharity });
+    },
+    addDrive: async (_parent, { user, charity, goal }) => {
       return await Drive.create({ user, charity, goal });
     },
-    updateDrive: async (parent, { id, charity, goal }) => {
+    updateDrive: async (_parent, { id, charity, goal }) => {
       return await Drive.findOneAndUpdate(
         { _id: id },
         { charity },
