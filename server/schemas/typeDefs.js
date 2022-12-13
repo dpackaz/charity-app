@@ -47,7 +47,8 @@ const typeDefs = gql`
     users: [User]
     user(userId: ID!): User
     charities: [Charity]
-    drive(id: ID!): Drive
+    driveMe(id: ID!): Drive
+    driveAll: [Drive]
     charity(id: String): Charity
   }
 
@@ -60,10 +61,12 @@ const typeDefs = gql`
     ): User
     saveCharity(newCharity: CharityInput): Charity
     updateUser(id: ID!, email: String, password: String): User
-    addDrive(user: UserInput!, charity: CharityInput!, goal: Int!): Drive
+    addDrive(userId: ID!, charityId: String!, goal: Int!): Drive
     updateDrive(id: ID!, charity: CharityInput!, goal: Int!): Drive
   }
 `;
 //TODO: Modifify updateUser to be more flexible
 // words
+//TODO: updateDrive to update User and change Goal
+
 module.exports = typeDefs;

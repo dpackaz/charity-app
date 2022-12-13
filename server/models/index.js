@@ -2,10 +2,10 @@
 
 const User = require("./User");
 const Charities = require("./Charities");
-const Drive = require("./Drive");
+const Drive = require("./drive");
 
 module.exports = {
   User,
   Charities,
-  Drive,
+  Drive
 };
