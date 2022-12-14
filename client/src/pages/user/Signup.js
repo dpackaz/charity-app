@@ -17,7 +17,8 @@ export default function Login() {
       variables: { email, password, firstName, lastName },
     });
     const token = mutationResponse.data.signup.token;
-    Auth.login(token);
+    const id = mutationResponse.data.signup.user._id;
+    Auth.login(token, id);
 
     window.location = window.location.origin;
   };

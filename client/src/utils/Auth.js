@@ -1,8 +1,9 @@
 import decode from "jwt-decode";
 
 class AuthService {
-  login(token) {
+  login(token, id) {
     localStorage.setItem("token", token);
+    localStorage.setItem("user_id", id);
   }
 
   isLoggedIn() {
@@ -22,6 +23,7 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
     window.location = window.location.origin;
   }
 }

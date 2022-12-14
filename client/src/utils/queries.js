@@ -1,5 +1,19 @@
 import { gql } from "@apollo/client";
 
+export const QUERY_USER = gql`
+  query charity($charityId: String) {
+  charity(id: $charityId) {
+      name
+      mission
+      address
+      website_Url
+      pledge_Url
+      logo_Url
+      causes
+    }
+  }
+`;
+
 export const QUERY_CHARITY = gql`
   query charity($charityId: String) {
   charity(id: $charityId) {
