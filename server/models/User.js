@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
+const { Charities } = require("./index");
 
 const userSchema = new Schema({
   firstName: {
@@ -39,7 +40,7 @@ const userSchema = new Schema({
   charities: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Charity",
+      ref: "Charities",
     },
   ],
 });

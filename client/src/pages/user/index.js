@@ -15,6 +15,10 @@ const User = () => {
     let achievements = [];
     let totalDonations = donations.reduce((a, b) => a + b);
 
+    const [charityState, setCharity] = useState(data?.charity || {});
+    useEffect(()=>{
+      setCharity(data?.charity || {})
+    },[data])
 
     return (
         <>
@@ -26,11 +30,15 @@ const User = () => {
                 <Card>
                     <Card.Title>My Causes</Card.Title>
                     <Card.Text>
-                        <ul>
-                        <li>{cause[0]}</li>
-                        <li>{cause[1]}</li>
-                        <li>{cause[2]}</li>
-                        </ul>
+                        <div className="d-flex justify-content-start">
+                            {
+                                user.charity.map((name) => {
+                                    return(<div>
+                                        {name}
+                                    </div>)
+                                })
+                            }
+                        </div>
                     </Card.Text>
                 </Card>
 

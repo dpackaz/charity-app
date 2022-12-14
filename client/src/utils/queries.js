@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const QUERY_CHARITY = gql`
   query charity($charityId: String) {
-    charity(id: $charityId) {
+    charity(id: $charityId): {
       name
       mission
       address
@@ -16,7 +16,7 @@ export const QUERY_CHARITY = gql`
 
 export const QUERY_CHARITIES = gql`
   query charities {
-    charities {
+    charities: {
       address
       causes
       charityID

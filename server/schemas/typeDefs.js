@@ -9,6 +9,7 @@ const typeDefs = gql`
     email: String
     password: String
     friends: [User]
+    charities: [Charity]
   }
 
   input UserInput {
@@ -18,6 +19,7 @@ const typeDefs = gql`
   }
 
   type Charity {
+    _id: ID
     charityID: String
     name: String
     mission: String
@@ -36,7 +38,7 @@ const typeDefs = gql`
     website_Url: String
     pledge_Url: String
     logo_Url: String
-    causes:[String]
+    causes: [String]
   }
 
   type Drive {
@@ -49,15 +51,6 @@ const typeDefs = gql`
   type Auth {
     token: ID
     user: User
-  }
-
-  type User {
-    _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    friends: [User]
-    charities: [Charity]
   }
 
   type Query {
@@ -76,13 +69,14 @@ const typeDefs = gql`
       email: String!
       password: String!
     ): Auth
-    
+
     login(email: String!, password: String!): Auth
     saveCharity(newCharity: CharityInput): Charity
     updateUser(id: ID!, email: String, password: String): User
     addDrive(userId: ID!, charityId: String!, goal: Int!): Drive
     updateDrive(id: ID!, charity: CharityInput!, goal: Int!): Drive
     addFriend(id: ID!, friendId: ID!): User
+    addCharity(userId: ID!, charityId: ID!): User
   }
 `;
 //TODO: Modifify updateUser to be more flexible

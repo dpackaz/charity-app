@@ -11,7 +11,9 @@ const resolvers = {
       return await User.find({}).populate("friends");
     },
     user: async (_parent, { userId }) => {
-      return await User.findById(userId).populate("friends");
+      return await User.findById(userId)
+        .populate("friends")
+        .populate("charities");
     },
     charities: async () => {
       return await Charities.find({});
@@ -81,11 +83,17 @@ const resolvers = {
       ).populate("friends");
     },
     addCharity: async (_parent, { id, charityId }) => {
-      return await Charities.findOneAndUpdate(
+      console.log("Add Charity");
+        User.findOneAndUpdate(
         { _id: id },
-        { $addToSet: { myCharities: charityId } },
+        { $addToSet: { charities: charityId } },
         { new: true }
-      ).populate("myCharities");
+      ).populate("charities")
+      .then((response) => {
+        return response
+      }).catch((err) => {
+        console.log(err)
+      });
     },
   },
 };
