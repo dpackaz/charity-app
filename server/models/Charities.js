@@ -39,7 +39,6 @@ const newCharities = new Schema(
       virtuals: true,
       getters: true,
     },
-    id: false,
   }
 );
 

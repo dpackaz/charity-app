@@ -7,6 +7,7 @@ import Landing from "./pages/Landing";
 import Org from "./pages/org";
 import Login from "./pages/user/Login.js";
 import Signup from "./pages/user/Signup.js";
+import User from "./pages/user/";
 import {
   ApolloClient,
   InMemoryCache,
@@ -17,7 +18,7 @@ import { setContext } from "@apollo/client/link/context";
 import Auth from "./utils/Auth.js";
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("id_token");
+  const token = localStorage.getItem("token");
   return {
     headers: {
       ...headers,
@@ -49,6 +50,7 @@ function App() {
             <Route path="/Organization/:orgId" element={<Org />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/user/:userID" element={<User />} />
           </Routes>
         </div>
       </Router>
