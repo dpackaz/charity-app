@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { LOGIN } from "../utils/mutations";
 import "../res/css/Home.css";
 
 const Home = () => {
   return (
     <>
-      <div fluid className="text-light bg-dark jumbotron text-center">
+      <div className="text-light bg-dark jumbotron text-center">
         Test Jumbotron
       </div>
       <main>

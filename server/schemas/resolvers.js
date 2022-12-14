@@ -17,6 +17,8 @@ const resolvers = {
       return await Charities.find({});
     },
     charity: async (_parent, args) => {
+      // console.log("resolvers charity")
+      // console.log(args)
       return await Charities.findOne({ charityID: args.id });
     },
     driveMe: async (_parent, { id }) => {
@@ -27,33 +29,21 @@ const resolvers = {
     },
   },
   Mutation: {
-    addUser: async (_parent, { firstName, lastName, email, password }) => {
-      return await (
-        await User.create({ firstName, lastName, email, password })
-      ).populate("friends");
-    },
-    
     signup: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
-
       return { token, user };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
       }
-
       const correctPw = await user.isCorrectPassword(password);
-
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
       }
-
       const token = signToken(user);
-
       return { token, user };
     },
     updateUser: async (_parent, { id, email, password }) => {
