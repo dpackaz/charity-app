@@ -65,3 +65,13 @@ export const QUERY_USER = gql`
     }
   }
 `;
+
+export const QUERY_FRIENDS = gql`
+  query user($userId: ID!) {
+    user(userId: $userId) {
+      friends {
+        _id
+      }
+    }
+  }
+`;

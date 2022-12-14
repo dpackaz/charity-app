@@ -10,16 +10,23 @@ function AppNavbar({ isLoggedIn, setLoggedIn }) {
     Auth.logout();
   }
 
+  function loadProfile() {
+    window.location =
+      window.location.origin + "/user/" + localStorage.getItem("user_id");
+  }
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">Project Name</Navbar.Brand>
+        <Navbar.Brand href="#home">GivDex</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            <Nav.Link href="/">Home</Nav.Link>
             {isLoggedIn ? (
               <>
                 {/* Not Initialized*/}
+                <Nav.Link href="#" onClick={loadProfile}>Dashboard</Nav.Link>
                 <Nav.Link href="#" onClick={logout}>
                   Log Out
                 </Nav.Link>
@@ -30,8 +37,6 @@ function AppNavbar({ isLoggedIn, setLoggedIn }) {
                 <Nav.Link href="/signup">Sign Up</Nav.Link>
               </>
             )}
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
 
             {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
