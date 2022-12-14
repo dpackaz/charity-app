@@ -16,10 +16,9 @@ const resolvers = {
     charities: async () => {
       return await Charities.find({});
     },
-    charity: async (_parent, args) => {
+    charity: async (_parent, { id }) => {
       // console.log("resolvers charity")
-      // console.log(args)
-      return await Charities.findOne({ charityID: args.id });
+      return await Charities.findOne({ charityID: id });
     },
     driveMe: async (_parent, { id }) => {
       return await Drive.findById(id).populate("organizer").populate("charity");
@@ -79,6 +78,13 @@ const resolvers = {
         { $addToSet: { friends: friendId } },
         { new: true }
       ).populate("friends");
+    },
+    addCharity: async (_parent, { id, charityName }) => {
+      return await User.findOneAndUpdate(
+        { _id: id },
+        { $addToSet: { charities: charityName } },
+        { new: true }
+      );
     },
   },
 };
