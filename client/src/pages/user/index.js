@@ -3,9 +3,11 @@ import React, { useState, useEffect } from "react";
 import "./user.css";
 import { Card, Container } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
-import { useQuery } from "@apollo/client";
-import { QUERY_USER } from "../../utils/queries";
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_USER, QUERY_FRIENDS } from "../../utils/queries";
+import { ADD_FRIEND } from "../../utils/mutations";
 import Charity from "./Charity.js";
+import Auth from "../../utils/Auth.js";
 
 const User = () => {
   //TODO: add charity relationships
@@ -18,13 +20,33 @@ const User = () => {
   // and charities with my charitie's name
   //
   let { userID } = useParams();
+  let isOwned = Auth.isLoggedIn && userID == localStorage.getItem("user_id");
   const [myCharities, setMyCharities] = useState("");
+  const [addFriendMutation, { error }] = useMutation(ADD_FRIEND);
   const { loading, data } = useQuery(QUERY_USER, {
     variables: {
       userId: userID,
     },
     onCompleted: populate,
   });
+  const { isLoading, friendData } = useQuery(QUERY_FRIENDS, {
+    variables: {
+      userId: localStorage.getItem("user_id"),
+    },
+    onCompleted: checkIsFriend,
+  });
+
+  let [isFriend, setIsFriend] = useState(false);
+
+  function checkIsFriend(data) {
+    let hasFriend = false;
+    data.user.friends.forEach((friend) => {
+      if (friend._id == userID) {
+        hasFriend = true;
+      }
+    });
+    setIsFriend(hasFriend);
+  }
 
   let causes = [];
   let friendCauses = [];
@@ -47,6 +69,21 @@ const User = () => {
     setFriends(friends);
   }
 
+  async function addFriend() {
+    try {
+      const mutationResponse = await addFriendMutation({
+        variables: {
+          addFriendId: localStorage.getItem("user_id"),
+          friendId: userID,
+        },
+      });
+      setIsFriend(true);
+      alert("Now following " + data.user.firstName + " " + data.user.lastName);
+    } catch (e) {
+      alert("Could not add friend");
+    }
+  }
+
   return (
     <>
       <Container>
@@ -66,7 +103,7 @@ const User = () => {
                     return <Charity charityID={data} />;
                   })
                 ) : (
-                  <h2>No charities added</h2>
+                  <h2 class="text-center">No charities added</h2>
                 )}
               </div>
             </Card.Text>
@@ -90,6 +127,13 @@ const User = () => {
                 })
               ) : (
                 <h6 class="text-center">No friends</h6>
+              )}
+              {Auth.isLoggedIn() && !isOwned && !isFriend ? (
+                <button class="btn btn-primary p-0 mt-3" onClick={addFriend}>
+                  Add Friend
+                </button>
+              ) : (
+                <></>
               )}
             </div>
           </div>

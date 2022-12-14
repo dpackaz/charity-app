@@ -18,7 +18,7 @@ export default function Charity(props) {
   }
 
   return (
-    <div class="card col-3 shadow">
+    <div class="card col-4 shadow">
       <img
         src={charityState.logo_Url}
         class="card-img-top"
@@ -26,7 +26,7 @@ export default function Charity(props) {
       />
       <div class="card-body">
         <h5 class="card-title">{charityState.name}</h5>
-        <p class="card-text">{charityState.mission}</p>
+        <p class="card-text">{charityState.mission?.substring(0, 250) + "..."}</p>
         <a href={charityState.website_Url} class="btn btn-primary">
           Check it out
         </a>
