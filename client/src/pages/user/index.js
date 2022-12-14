@@ -40,11 +40,11 @@ const User = () => {
 
   function checkIsFriend(data) {
     let hasFriend = false;
-    data.user.friends.forEach(friend => {
-      if(friend._id == userID) {
+    data.user.friends.forEach((friend) => {
+      if (friend._id == userID) {
         hasFriend = true;
       }
-    })
+    });
     setIsFriend(hasFriend);
   }
 
@@ -78,6 +78,7 @@ const User = () => {
         },
       });
       setIsFriend(true);
+      alert("Now following " + data.user.firstName + " " + data.user.lastName);
     } catch (e) {
       alert("Could not add friend");
     }
