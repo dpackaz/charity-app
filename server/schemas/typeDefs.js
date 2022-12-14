@@ -9,7 +9,7 @@ const typeDefs = gql`
     email: String
     password: String
     friends: [User]
-    charities: [Charity]
+    charities: [String]
   }
 
   input UserInput {
@@ -76,7 +76,6 @@ const typeDefs = gql`
     addDrive(userId: ID!, charityId: String!, goal: Int!): Drive
     updateDrive(id: ID!, charity: CharityInput!, goal: Int!): Drive
     addFriend(id: ID!, friendId: ID!): User
-    addCharity(userId: ID!, charityId: ID!): User
   }
 `;
 //TODO: Modifify updateUser to be more flexible

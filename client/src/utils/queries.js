@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const QUERY_CHARITY = gql`
   query charity($charityId: String) {
-    charity(id: $charityId): {
+    charity(id: $charityId) {
       name
       mission
       address
@@ -16,7 +16,7 @@ export const QUERY_CHARITY = gql`
 
 export const QUERY_CHARITIES = gql`
   query charities {
-    charities: {
+    charities {
       address
       causes
       charityID
@@ -29,7 +29,7 @@ export const QUERY_CHARITIES = gql`
   }
 `;
 
-export const QUERY_USER = gql`
+export const QUERY_USERS = gql`
   query users {
     firstName
     lastName
@@ -48,6 +48,15 @@ export const QUERY_USER = gql`
       name
       pledge_Url
       website_Url
+    }
+  }
+`;
+export const QUERY_USER = gql`
+  query user($userId: ID!) {
+    user(id: userId){
+      firstName
+      lastName
+      
     }
   }
 `;

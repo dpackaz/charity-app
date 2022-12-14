@@ -82,19 +82,6 @@ const resolvers = {
         { new: true }
       ).populate("friends");
     },
-    addCharity: async (_parent, { id, charityId }) => {
-      console.log("Add Charity");
-        User.findOneAndUpdate(
-        { _id: id },
-        { $addToSet: { charities: charityId } },
-        { new: true }
-      ).populate("charities")
-      .then((response) => {
-        return response
-      }).catch((err) => {
-        console.log(err)
-      });
-    },
   },
 };
 
