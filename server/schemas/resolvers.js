@@ -31,6 +31,8 @@ const resolvers = {
       return await (
         await User.create({ firstName, lastName, email, password })
       ).populate("friends");
+    },
+    
     signup: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
