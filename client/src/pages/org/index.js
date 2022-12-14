@@ -39,28 +39,27 @@ const Org = () => {
         .catch((err) => {
           console.log(err);
         });
-    }
-    else return data
+    } else return data;
   }
   let { orgId } = useParams();
   const { loading, error, data } = useQuery(QUERY_CHARITY, {
-    variables: { charityId: orgId }
+    variables: { charityId: orgId },
     // ,
     // onCompleted: fetchIfEmpty
   });
   const [charityState, setCharity] = useState(data?.charity || {});
-  useEffect(()=>{
-    setCharity(data?.charity || {})
-  },[data])
+  useEffect(() => {
+    setCharity(data?.charity || {});
+  }, [data]);
 
-  
   //data isn't loaded by the time we have reached this line
   // console.log(charityState);
   return (
     <>
       {loading ? (
         <div> Loading...</div>
-      ) : ( charityState.name ? (<Container>
+      ) : charityState.name ? (
+        <Container>
           <h1 className="text-center">{charityState.name}</h1>
           <h2 className="text-center">
             <img src={charityState.logo_Url} alt="Organization Logo" />
@@ -77,7 +76,7 @@ const Org = () => {
                 charityState.causes.length > 0 ? (
                   charityState.causes.map((cause, index) => {
                     return (
-                      <div key={"cause-" + index} className="p-2">
+                      <div key={"cause-" + (index + 1)} className="p-2">
                         <span className="badge text-bg-secondary fs-4 rounded-pill">
                           {cause}
                         </span>
@@ -108,10 +107,11 @@ const Org = () => {
               Donate using Pledge
             </a>
           </div>
-        </Container>) : (
-          <h1 className="text-center mt-5">Looks like this charity isn't in our database</h1>
-          )
-        
+        </Container>
+      ) : (
+        <h1 className="text-center mt-5">
+          Looks like this charity isn't in our database
+        </h1>
       )}
     </>
   );

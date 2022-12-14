@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
+const { Charities } = require("./index");
 
 const userSchema = new Schema({
   firstName: {
@@ -36,6 +37,7 @@ const userSchema = new Schema({
       ref: "User",
     },
   ],
+  charities: [String],
 });
 
 userSchema.pre("save", async function (next) {

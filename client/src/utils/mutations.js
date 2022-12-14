@@ -1,14 +1,24 @@
 import { gql } from "@apollo/client";
 
 export const SIGNUP = gql`
-mutation signup($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
-  signup(firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
-    token
-    user {
-      _id
+  mutation signup(
+    $firstName: String!
+    $lastName: String!
+    $email: String!
+    $password: String!
+  ) {
+    signup(
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+      password: $password
+    ) {
+      token
+      user {
+        _id
+      }
     }
   }
-}
 `;
 
 export const LOGIN = gql`
@@ -42,6 +52,14 @@ export const CREATE_DRIVE = gql`
         _id
         goal
       }
+    }
+  }
+`;
+
+export const ADD_FRIEND = gql`
+  mutation addFriend($addFriendId: ID!, $friendId: ID!) {
+    addFriend(id: $addFriendId, friendId: $friendId) {
+      _id
     }
   }
 `;
