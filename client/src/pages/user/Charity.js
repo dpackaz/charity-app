@@ -13,8 +13,24 @@ export default function Charity(props) {
   const [charityState, setCharity] = useState({});
 
   function setCharityState(data) {
-    setCharity(data);
+    console.log(data);
+    setCharity(data.charity);
   }
 
-  return <h1>{localStorage.getItem("token")}</h1>;
+  return (
+    <div class="card col-3 shadow">
+      <img
+        src={charityState.logo_Url}
+        class="card-img-top"
+        alt="Charity logo"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{charityState.name}</h5>
+        <p class="card-text">{charityState.mission}</p>
+        <a href={charityState.website_Url} class="btn btn-primary">
+          Check it out
+        </a>
+      </div>
+    </div>
+  );
 }

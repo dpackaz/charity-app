@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "./user.css";
 import { Card, Container } from "react-bootstrap";
@@ -16,10 +17,11 @@ const User = () => {
   // then I want to populate the page with my user information
   // and charities with my charitie's name
   //
+  let { userID } = useParams();
   const [myCharities, setMyCharities] = useState("");
   const { loading, data } = useQuery(QUERY_USER, {
     variables: {
-      userId: localStorage.getItem("user_id"),
+      userId: userID,
     },
     onCompleted: populate,
   });
@@ -29,6 +31,7 @@ const User = () => {
   //let totalDonations = donations.reduce((a, b) => a + b);
 
   const [charityState, setCharity] = useState([]);
+  const [friendState, setFriends] = useState([]);
 
   function populate() {
     let array = [];
@@ -36,6 +39,12 @@ const User = () => {
       array.push(charity);
     });
     setCharity(array);
+
+    let friends = [];
+    data.user.friends.forEach((friend) => {
+      friends.push(friend);
+    });
+    setFriends(friends);
   }
 
   return (
@@ -44,23 +53,48 @@ const User = () => {
         {/* <h1>{data.firstName + " " + data.lastName}</h1> */}
       </Container>
 
-      <Container>
-        <Card>
-          <Card.Title>My Causes</Card.Title>
-          <Card.Text>
-            <div className="d-flex flex-column justify-content-start">
-              {charityState.map((data) => {
-                return <Charity charityID={data}/>;
-              })}
-            </div>
-          </Card.Text>
-        </Card>
+      <div class="container">
+        <div class="row justify-content-evenly">
+          <div class="col m-3 pl-3">
+            <Card.Title class="text-center m-3 text-bold fw-bold fs-4">
+              My Causes
+            </Card.Title>
+            <Card.Text class="mb-4">
+              <div className="d-flex flex-row justify-content-evenly row flex-r ">
+                {charityState.length > 0 ? (
+                  charityState.map((data) => {
+                    return <Charity charityID={data} />;
+                  })
+                ) : (
+                  <h2>No charities added</h2>
+                )}
+              </div>
+            </Card.Text>
+          </div>
 
-        <Card>
-          <Card.Title>Donate</Card.Title>
-          {}
-        </Card>
-      </Container>
+          <div class="col-2 m-3">
+            <Card.Title class="text-center m-3 text-bold fw-bold fs-4">
+              Following
+            </Card.Title>
+            <div class="d-flex flex-column">
+              {friendState.length > 0 ? (
+                friendState.map((friend) => {
+                  return (
+                    <a
+                      class="text-center"
+                      href={window.location.origin + "/user/" + friend._id}
+                    >
+                      {friend.firstName + " " + friend.lastName}
+                    </a>
+                  );
+                })
+              ) : (
+                <h6 class="text-center">No friends</h6>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
