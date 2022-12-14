@@ -128,7 +128,7 @@ const User = () => {
               ) : (
                 <h6 class="text-center">No friends</h6>
               )}
-              {!isOwned && !isFriend ? (
+              {Auth.isLoggedIn() && !isOwned && !isFriend ? (
                 <button class="btn btn-primary p-0 mt-3" onClick={addFriend}>
                   Add Friend
                 </button>
