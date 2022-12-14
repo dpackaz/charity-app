@@ -73,7 +73,7 @@ const Org = () => {
             </div>
             <div className="d-flex justify-content-start">
               {
-                charityState.causes > 0 ? (
+                charityState.causes.length > 0 ? (
                   charityState.causes.map((cause, index) => {
                     return (
                       <div key={"cause-" + (index + 1)} className="p-2">
