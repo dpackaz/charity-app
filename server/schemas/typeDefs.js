@@ -76,6 +76,7 @@ const typeDefs = gql`
     addDrive(userId: ID!, charityId: String!, goal: Int!): Drive
     updateDrive(id: ID!, charity: CharityInput!, goal: Int!): Drive
     addFriend(id: ID!, friendId: ID!): User
+    addCharity(id: ID!, charityName: String!): User
   }
 `;
 //TODO: Modifify updateUser to be more flexible
