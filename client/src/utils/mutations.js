@@ -63,3 +63,12 @@ export const ADD_FRIEND = gql`
     }
   }
 `;
+export const ADD_CHARITY_TO_USER = gql`
+  mutation addCharity($addCharityId: ID!, $charityName: String!){
+    addCharity(id: $addCharityId, charityName: $charityName){
+      _id
+      firstName
+      lastName
+    }
+  }  
+`;
