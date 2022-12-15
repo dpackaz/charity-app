@@ -1,12 +1,13 @@
 const axios = require("axios");
 const fs = require("fs");
 const empty = require('./empty.json')
+require ("dotenv").config();
 const populate = async (json) => {
   for (data of json) {
     axios
       .get(`https://api.pledge.to/v1/organizations?region=${data.id}`, {
         headers: {
-          Authorization: "Bearer 20a72174a80aec48cfb3ddca840ae084",
+          Authorization: "Bearer " + process.env.PLEDGE_API_KEY,
         },
       })
       .then((response) => {
