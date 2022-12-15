@@ -15,9 +15,13 @@ const Home = () => {
     //     </div>
     //   </main>
     // </>
-    <div className="bg-primary" style={{height:"100vh"}} >
-    <Map />
-    </div>
+    <>
+
+      <div className="bg-primary" style={{height:"100vh"}} >
+        <Map />
+      </div>
+    </>
+    
   );
 };
 
