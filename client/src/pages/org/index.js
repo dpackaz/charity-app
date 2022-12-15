@@ -3,10 +3,24 @@ import "./Org.css";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_CHARITY } from "../../utils/queries";
+import { ADD_CHARITY_TO_USER } from "../../utils/mutations";
+import Auth from '../../utils/Auth'
 
 const Org = () => {
+  //Write a function that adds charity to user's charity
+  const charityButtonHandle = async() => {
+    let id = localStorage.getItem("user_id");
+    console.log("entered charityButtonHandle Function");
+    try{
+      await addCharitytoUser({variables:{addCharityId: id, charityName: orgId}});
+      
+    } catch(er){
+      console.log(er);
+    }
+  };
+
   function fetchIfEmpty(data) {
     if (!data.charity) {
       fetch("https://api.pledge.to/v1/organizations/" + orgId, {
@@ -42,6 +56,8 @@ const Org = () => {
     } else return data;
   }
   let { orgId } = useParams();
+  let isOwned = Auth.isLoggedIn;
+  const[ addCharitytoUser, {mutErr}] = useMutation(ADD_CHARITY_TO_USER);
   const { loading, error, data } = useQuery(QUERY_CHARITY, {
     variables: { charityId: orgId },
     // ,
@@ -59,7 +75,7 @@ const Org = () => {
       {loading ? (
         <div> Loading...</div>
       ) : charityState.name ? (
-        <Container>
+        <Container >
           <h1 className="text-center">{charityState.name}</h1>
           <h2 className="text-center">
             <img src={charityState.logo_Url} alt="Organization Logo" />
@@ -99,6 +115,13 @@ const Org = () => {
             >
               Visit Us
             </a>
+            {/* TODO: Come back wheneverthing else works */}
+            {Auth.isLoggedIn() ? (  <button
+              className="btn btn-primary"
+              onClick={()=>{charityButtonHandle()}}
+            >
+              Add to your Profile
+            </button>) : (<></>)}
             <a
               className="btn btn-primary"
               href={charityState.pledge_Url}
