@@ -20,7 +20,7 @@ const User = () => {
   // and charities with my charitie's name
   //
   let { userID } = useParams();
-  let isOwned = Auth.isLoggedIn && userID == localStorage.getItem("user_id");
+  let isOwned = Auth.isLoggedIn() && userID == localStorage.getItem("user_id");
   const [myCharities, setMyCharities] = useState("");
   const [addFriendMutation, { error }] = useMutation(ADD_FRIEND);
   const { loading, data } = useQuery(QUERY_USER, {
