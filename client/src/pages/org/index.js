@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_CHARITY } from "../../utils/queries";
 import { ADD_CHARITY_TO_USER } from "../../utils/mutations";
+require ("dotenv").config();
 import Auth from '../../utils/Auth'
 
 const Org = () => {
@@ -21,13 +22,13 @@ const Org = () => {
     }
   };
 
-  function fetchIfEmpty(data) {
+a  function fetchIfEmpty(data) {
     if (!data.charity) {
       fetch("https://api.pledge.to/v1/organizations/" + orgId, {
         method: "GET",
         mode: "cors",
         headers: {
-          Authorization: "Bearer 20a72174a80aec48cfb3ddca840ae084",
+          Authorization: "Bearer " + process.env.PLEDGE_API_KEY,
         },
       })
         .then((response) => {
