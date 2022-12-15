@@ -42,16 +42,63 @@ This application is meant to make it easier for people to donate to charitable c
 
 ## Code Snippets
 
-```javascript
+The following code snippet demonstrates key data that is retrieved from our local database and the Pledge API through our Users Query.
 
+```javascript
+export const QUERY_USERS = gql`
+  query users {
+    firstName
+    lastName
+    email
+    password
+    friends {
+      firstName
+      lastName
+    }
+    charities {
+      address
+      causes
+      charityID
+      logo_Url
+      mission
+      name
+      pledge_Url
+      website_Url
+    }
+  }
+`;
 ```
 
-```javascript
-
-```
+This next snippet displays the client-side event listener that calls the Pledge API to return the charity data.
 
 ```javascript
-
+if (!data.charity) {
+      fetch("https://api.pledge.to/v1/organizations/" + orgId, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          Authorization: "Bearer " + process.env.PLEDGE_API_KEY,
+        },
+      })
+        .then((response) => {
+          console.log(response);
+          if (response.ok) {
+            response.then((json) => {
+              let charityResponse = {
+                address: json.street1 + ", " + json.city + " " + json.region,
+                causes: [],
+                charityID: json.id,
+                logo_url: json.logo_url,
+                mission: json.mission,
+                name: json.name,
+                pledge_Url: json.website_url,
+              };
+              setCharity(charityResponse);
+              console.log(charityResponse);
+            });
+          } else {
+            console.log("Error with request");
+          }
 ```
 
 ## Usage
